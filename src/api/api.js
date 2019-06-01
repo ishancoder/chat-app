@@ -1,7 +1,24 @@
 import {v4 as uuid} from "uuid";
 
-let users = {};
-let chats = {};
+let users = {
+    ishan:{
+        name: "Ishan Saxena", 
+        contacts:[{chatId: 'a',userName:"peter"}, {chatId: 'b', userName:"brandon"}, {chatId: 'c', userName:"harry"}]
+    },
+    peter: {
+        name: "Peter Parker",
+        contacts:[{chatId: 'a', userName:"ishan"}, {chatId: 'd', userName:"brandon"}]
+    },
+    harry: {
+        name: "Harry Potter",
+        contacts: [{chatId: 'c', userName:"ishan"}, {chatId: 'e', userName:"brandon"}]
+    },
+    brandon: {
+        name: "Brandon Eich",
+        contacts: [{chatId: 'b', userName: "ishan"}, {chatId: 'd', userName: "peter"}, {chatId: 'e', userName: "harry"}]
+    }
+};
+let chats = {a:[], b:[{type: "TEXT", createdOn: 1559142274000, from: "ishan", to: "brandon", message:"Sample text message"},{type: "TEXT", createdOn: 1559142274000, from: "brandon", to: "ishan", message:"Sample text message 2"}], c:[], d:[], e:[]};
 const FAILED = "FAILED";
 const SUCCESS = "SUCCESS";
 
@@ -56,11 +73,17 @@ export function addContact(userName, contactUserName) {
 export function getUser(userName) {
     if(!exists(userName))
         return Promise.reject({status: FAILED, err: `No user exists with username: ${userName}`});
-    const {contacts} = users[userName];
-    return Promise.resolve({status: SUCCESS, data: {userName, contacts}});
+    const {contacts, name} = users[userName];
+    return Promise.resolve({status: SUCCESS, data: {userName, name, contacts}});
 }
 
 // Mock API functions for CHATS
+export function getMessages(chatId) {
+    if(!!chats[chatId])
+        return Promise.resolve({status: SUCCESS, data: chats[chatId]});
+    return Promise.reject({status: FAILED, err: `Invalid chatid : ${chatId}`});
+}
+
 export function sendMessage(from, to, message) {
     if(!exists(from))
         return Promise.reject({status: FAILED, err: `Invalid username : ${from}`});
@@ -69,13 +92,12 @@ export function sendMessage(from, to, message) {
     if(!areConnected(from, to))
         return Promise.reject({status: FAILED, err: `Users ${from} and ${to} are not connected`});
     const chatId = getChatId(from, to);
-    const messageBody = {message, createdOn: (new Date()).getTime(), from, to};
-    if(!chats[chatId]) {
+    const messageBody = {type: "TEXT", message, createdOn: (new Date()).getTime(), from, to};
+    if(chats[chatId]) {
         chats[chatId].push(messageBody);
-    } else {
-        chats[chatId] = [messageBody];
+        return Promise.resolve({status: SUCCESS, data: messageBody}); 
     }
-    return Promise.resolve({status: SUCCESS, data: "Message sent successfully"}); 
+    return Promise.reject({status: FAILED, err: `Chat id ${chatId} not exists`});
 }
 
 export function sendAudioMessage(from, to, audioObject) {
