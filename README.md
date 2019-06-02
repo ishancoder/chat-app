@@ -1,68 +1,24 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## How to get this thing working ?
+1. Clone the repository using `git clone` or Just download it whichever your prefer.
+2. `cd` into the directory.
+3. Run `npm install` or `yarn` (if you're using yarn).
+4. Sit back relax & let the dependecies download.
+5. Run `npm start` or `yarn start` (Again if you're using it)
+6. A browser window will automatically open & in case if it didn't open your favourite browser and go to : [http://localhost:3000](http://localhost:3000).
 
-In the project directory, you can run:
 
-### `npm start`
+## What have I implemented ?
+1. First I'm assuming the user is already logged in which is going to be me by default. If you want you to be logged in add yourself in `api.js` file & change `App.js` to load your data by default.
+2. All your contacts will be shown in the right pane. If you want to add anyone just click on the top "Plus" button and type a **Valid User Name** (Note: Since this is only the front end part you have can only type a valid username which is defined in the `api.js` file). I desperatly wanted to implement a searchable dropdown here but due to time contraints I didn't managed to do it.
+3. You can navigate between chats using **Arrow UP** and **Arrow DOWN** keys.
+4. You can record and send your audio as well. Just click on the **Microphone** button and it will start recording and click it again to stop and send your recording. (Make sure you have your microphone connected otherwise it'll give you and alert that you device doesn't support audio recording).
+5. Anything which is written as @Username will going to be rendered as <mark>@Username</mark> iff the user is in you contact list.
+6. This app will work fine with a good tablet/desktop or laptop. I was not able to make it responsive again due to time constraints. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## What did I use to build it ?
+1. **React.js** my choice of front end framework for almost all projects.
+2. **node-uuid** to dynamically generate mock chat ids.
+3. **SASS** Syntactically Awesome.
+4. Where is **REDUX** ? you might be asking but to be honest I didn't felt the need of using **REDUX** it this project. 
