@@ -16,6 +16,10 @@ let users = {
     brandon: {
         name: "Brandon Eich",
         contacts: [{ chatId: 'b', userName: "ishan" }, { chatId: 'd', userName: "peter" }, { chatId: 'e', userName: "harry" }]
+    },
+    hulk: {
+        name: "Bruce Banner",
+        contacts: []
     }
 };
 let chats = { a: [], b: [{ type: "TEXT", createdOn: 1559142274000, from: "ishan", to: "brandon", data: "Sample text message" }, { type: "TEXT", createdOn: 1559142275000, from: "brandon", to: "ishan", data: "Sample text message 2" }], c: [], d: [], e: [] };
@@ -37,6 +41,7 @@ function connect(userName, contactUserName) {
         const chatId = uuid();
         users[userName].contacts.push({ chatId, userName: contactUserName });
         users[contactUserName].contacts.push({ chatId, userName });
+        chats[chatId] = [];
     }
 }
 
@@ -60,14 +65,14 @@ export function userDoesExists(userName) {
 
 export function addContact(userName, contactUserName) {
     if (!exists(userName))
-        return Promise.reject({ err: `No user exists with username : ${userName}` });
+        return Promise.reject({ status: FAILED, err: `No user exists with username : ${userName}` });
     if (!exists(contactUserName))
-        return Promise.reject({ err: `No user exists with username ${contactUserName}` });
+        return Promise.reject({ status: FAILED, err: `No user exists with username ${contactUserName}` });
     if (areConnected(userName, contactUserName))
-        return Promise.reject({ err: `Users are already connected` });
+        return Promise.reject({ status: FAILED, err: `You are already connected to ${contactUserName}` });
 
     connect(userName, contactUserName);
-    return Promise.resolve({ status: SUCCESS, data: "Succefully connected" });
+    return Promise.resolve({ status: SUCCESS, data: users[contactUserName] });
 }
 
 export function getUser(userName) {

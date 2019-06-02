@@ -33,7 +33,7 @@ class ChatArea extends Component {
                 this.setState({ loading: false, chats: [] });
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 

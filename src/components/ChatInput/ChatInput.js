@@ -21,7 +21,7 @@ class ChatInput extends Component {
             this.mediaRecorder = new MediaRecorder(audioStream);
         } catch (err) {
             console.error(err.name, err.message);
-            return alert("Audio recording is not supported, Make sure that you have a microphone connected or You've given  the permission to record audio.");
+            return;
         }
         this.mediaRecorder.ondataavailable = ev => this.audioChunks.push(ev.data);
         this.mediaRecorder.onstop = () => {

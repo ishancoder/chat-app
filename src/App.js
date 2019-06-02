@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./App.sass";
 import Header from "./components/Header/Header";
-import { getUser } from "./api/api";
+import { getUser, addContact } from "./api/api";
 import ContactList from "./components/ContactList/ContactList";
 import ChatArea from "./components/ChatArea/ChatArea";
 
@@ -45,10 +45,21 @@ class App extends Component {
         }
     }; 
 
+    addContact = async contactUsername => {
+        try{
+            const {data} = await addContact(this.state.currentUser.userName, contactUsername);
+            this.setState(prevState => ({...prevState, contacts: [...prevState.currentUser.contacts, {...data}]}));
+        } catch(error) {
+            return alert(error.err)
+        }
+    };
+
     render() {
         if(!this.state.currentUser || !this.state.selectedUser) return null;
         return <section className="App" tabIndex="0" onKeyUp={this.handleNavigation}>
-            <Header name={this.state.selectedUser.name}/>
+            <Header 
+                name={this.state.selectedUser.name}
+                addContact={this.addContact}/>
             <div className="main">
                 <ContactList 
                     contacts={this.state.currentUser.contacts} 

@@ -1,0 +1,41 @@
+.add-user-form
+    display: flex
+    background: teal
+    height: 50px
+    margin-left: -20px
+
+    .inputs
+        transform: translateX(-100%);
+        transition: all 500ms ease-in-out
+        position: absolute
+        z-index: 5
+
+        input
+            height: 40px
+            font-size: 20px
+            border: none
+            outline: none
+            width: 100%
+            margin: 0 -40px
+            padding: 1px 20px 2px 45px
+            border-radius: 99em
+
+        &.open 
+            transform: translateX(40px);
+
+        button
+            vertical-align: top
+
+    button
+        height: 40px
+        width: 40px
+        border: none
+        outline: none
+        cursor: pointer
+        border-radius: 50%
+        transition: all 500ms ease-in-out
+        margin-top: 6px
+        z-index: 10
+
+        &.close
+            transform: rotate(1.66*135deg);
