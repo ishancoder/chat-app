@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./AddUser.sass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 class AddUser extends Component {
     constructor(props) {
@@ -40,7 +40,7 @@ class AddUser extends Component {
                     placeholder="Type to add user" 
                     value={this.state.text} 
                     onChange={this.handleChange}/>
-                <button type="submit"><FontAwesomeIcon icon={faUser}/></button>
+                <button type="submit"><FontAwesomeIcon icon={faCheck}/></button>
             </form>
         </div>
     }
