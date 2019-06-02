@@ -14,7 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 2. All your contacts will be shown in the right pane. If you want to add anyone just click on the top "Plus" button and type a **Valid User Name** (Note: Since this is only the front end part you have can only type a valid username which is defined in the `api.js` file). I desperatly wanted to implement a searchable dropdown here but due to time contraints I didn't managed to do it.
 3. You can navigate between chats using **Arrow UP** and **Arrow DOWN** keys.
 4. You can record and send your audio as well. Just click on the **Microphone** button and it will start recording and click it again to stop and send your recording. (Make sure you have your microphone connected otherwise it'll give you and alert that you device doesn't support audio recording).
-5. Anything which is written as @Username will going to be rendered as <mark>@Username</mark> iff the user is in you contact list.
+5. Anything which is written as @Username will going to be rendered as <mark>@Username</mark> (If you can't see it highlighted than then markdown here doesn't supports HTML5 but all I wanted to say that it'll get **highlighted**) iff the user is in you contact list.
 6. This app will work fine with a good tablet/desktop or laptop. I was not able to make it responsive again due to time constraints. 
 
 ## What did I use to build it ?
