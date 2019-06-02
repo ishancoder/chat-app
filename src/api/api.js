@@ -18,26 +18,7 @@ let users = {
         contacts: [{ chatId: 'b', userName: "ishan" }, { chatId: 'd', userName: "peter" }, { chatId: 'e', userName: "harry" }]
     }
 };
-
-let chats = {
-    a: [],
-    b: [{
-            type: "TEXT",
-            createdOn: 1559142274000,
-            from: "ishan", to: "brandon",
-            message: "Sample text message"
-        },
-        {
-            type: "TEXT",
-            createdOn: 1559142274000,
-            from: "brandon", to: "ishan",
-            message: "Sample text message 2"
-        }],
-    c: [],
-    d: [],
-    e: []
-};
-
+let chats = { a: [], b: [{ type: "TEXT", createdOn: 1559142274000, from: "ishan", to: "brandon", data: "Sample text message" }, { type: "TEXT", createdOn: 1559142275000, from: "brandon", to: "ishan", data: "Sample text message 2" }], c: [], d: [], e: [] };
 const FAILED = "FAILED";
 const SUCCESS = "SUCCESS";
 
@@ -103,7 +84,7 @@ export function getMessages(chatId) {
     return Promise.reject({ status: FAILED, err: `Invalid chatid : ${chatId}` });
 }
 
-export function sendMessage(from, to, message) {
+function send(type, from, to, data) {
     if (!exists(from))
         return Promise.reject({ status: FAILED, err: `Invalid username : ${from}` });
     if (!exists(to))
@@ -111,7 +92,7 @@ export function sendMessage(from, to, message) {
     if (!areConnected(from, to))
         return Promise.reject({ status: FAILED, err: `Users ${from} and ${to} are not connected` });
     const chatId = getChatId(from, to);
-    const messageBody = { type: "TEXT", message, createdOn: (new Date()).getTime(), from, to };
+    const messageBody = { type, data, createdOn: (new Date()).getTime(), from, to };
     if (chats[chatId]) {
         chats[chatId].push(messageBody);
         return Promise.resolve({ status: SUCCESS, data: messageBody });
@@ -119,6 +100,10 @@ export function sendMessage(from, to, message) {
     return Promise.reject({ status: FAILED, err: `Chat id ${chatId} not exists` });
 }
 
-export function sendAudioMessage(from, to, audioObject) {
-    //TODO: Implement this after finishing the basic chat flow
+export function sendMessage(from, to, message) {
+    return send("TEXT", from, to, message);
+}
+
+export function sendAudioMessage(from, to, url) {
+    return send("AUDIO", from, to, url);
 }

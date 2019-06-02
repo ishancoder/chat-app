@@ -1,0 +1,30 @@
+.chat-area
+    position: relative
+    width: 100%
+
+    .chat-view
+        max-height: calc(100vh - 130px)
+        scroll-behavior: smooth
+        overflow-y: scroll
+
+        .wrapper
+            margin: 5px 10px
+
+            audio
+                outline: none
+
+        .sent
+            text-align: left
+
+        .received
+            text-align: right
+            
+            .message
+                background: lightgreen 
+        
+        .message
+            display: inline-block
+            position: relative
+            padding: 30px
+            background: #DDD
+            border-radius: 10px
